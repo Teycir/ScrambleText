@@ -2,6 +2,19 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.1.0] - 2024-11-19
+
+### Changed
+- Optimized homoglyph selection for better human readability
+- Reduced to only visually identical characters (Cyrillic/Greek)
+- Removed combining diacritics and fullwidth characters
+- Adjusted zero-width character injection to 70% probability
+- Maintained 100% homoglyph replacement for maximum machine hostility
+
+### Improved
+- Text now looks completely normal to humans while remaining hostile to machines
+- Better balance between readability and obfuscation effectiveness
+
 ## [1.0.0] - 2024-11-19
 
 ### Added

@@ -5,30 +5,29 @@ const copyButton = document.getElementById('copyButton') as HTMLButtonElement;
 const copyStatus = document.getElementById('copyStatus') as HTMLSpanElement;
 
 const HOMOGLYPHS: { [key: string]: string[] } = {
-  'a': ['а', 'ɑ', 'α'], 'c': ['с', 'ϲ'], 'e': ['е', 'ε'],
-  'o': ['о', 'ο', 'σ'], 'p': ['р', 'ρ'], 'x': ['х', 'χ'],
-  'y': ['у', 'γ'], 'A': ['А', 'Α'], 'B': ['В', 'Β'],
-  'C': ['С'], 'E': ['Е', 'Ε'], 'H': ['Н', 'Η'],
-  'I': ['І', 'Ι'], 'K': ['К', 'Κ'], 'M': ['М', 'Μ'],
-  'N': ['Ν'], 'O': ['О', 'Ο'], 'P': ['Р', 'Ρ'],
-  'T': ['Т', 'Τ'], 'X': ['Х', 'Χ'], 'Y': ['Υ'], 'Z': ['Ζ']
+  'a': ['а', 'ɑ'], 'c': ['с', 'ϲ'], 'e': ['е', 'ε'],
+  'o': ['о', 'ο'], 'p': ['р', 'ρ'], 'x': ['х', 'χ'],
+  'y': ['у', 'γ'], 'i': ['і', 'ı'], 's': ['ѕ'], 'v': ['ν'],
+  'A': ['А', 'Α'], 'B': ['В', 'Β'], 'C': ['С'], 'E': ['Е', 'Ε'],
+  'H': ['Н', 'Η'], 'I': ['І', 'Ι'], 'K': ['К', 'Κ'], 'M': ['М', 'Μ'],
+  'N': ['Ν'], 'O': ['О', 'Ο'], 'P': ['Р', 'Ρ'], 'T': ['Т', 'Τ'],
+  'X': ['Х', 'Χ'], 'Y': ['Υ'], 'Z': ['Ζ'], 'S': ['Ѕ']
 };
 
-const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D', '\uFEFF'];
+const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
 function scramble(text: string): string {
-  const intensity = 0.9;
   let result = '';
   
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
-    if (HOMOGLYPHS[char] && Math.random() < intensity) {
+    if (HOMOGLYPHS[char]) {
       const variants = HOMOGLYPHS[char];
       result += variants[Math.floor(Math.random() * variants.length)];
     } else {
       result += char;
     }
-    if (i < text.length - 1 && /[a-zA-Z]/.test(char) && Math.random() < intensity * 0.5) {
+    if (i < text.length - 1 && /[a-zA-Z]/.test(char) && Math.random() < 0.7) {
       result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
     }
   }
