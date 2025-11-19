@@ -2,6 +2,24 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.6.0] - 2024-11-19
+
+### Added
+- ON/OFF toggle switch in popup header for enabling/disabling extension
+- Horizontal toggle design with purple (ON) and red (OFF) states
+- Left-aligned header text with toggle positioned on the right
+- Extension state persists across browser sessions
+
+### Changed
+- Header layout changed from centered to left-aligned
+- Popup width remains at 380px
+- Toggle controls both context menu scrambling and Ctrl+Enter functionality
+
+### Fixed
+- Removed double scrambling issue when using context menu + paste
+- Disabled automatic paste scrambling to prevent conflicts
+- Context menu now respects toggle state (no scrambling when OFF)
+
 ## [1.5.0] - 2024-11-19
 
 ### Changed

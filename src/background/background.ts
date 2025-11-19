@@ -82,8 +82,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === 'scrambleText' && info.selectionText && tab?.id) {
-    const profile = await chrome.storage.sync.get(['profile']);
-    const currentProfile = profile.profile || 'anti-mod';
+    const settings = await chrome.storage.sync.get(['profile', 'enabled']);
+    if (settings.enabled === false) return;
+    const currentProfile = settings.profile || 'anti-mod';
     const scrambled = scramble(info.selectionText, currentProfile);
     const profileName = PROFILE_NAMES[currentProfile];
     

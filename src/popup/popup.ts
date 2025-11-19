@@ -4,6 +4,7 @@ const previewOutput = document.getElementById('previewOutput') as HTMLDivElement
 const copyButton = document.getElementById('copyButton') as HTMLButtonElement;
 const regenerateButton = document.getElementById('regenerateButton') as HTMLButtonElement;
 const profileSelect = document.getElementById('profileSelect') as HTMLSelectElement;
+const extensionToggle = document.getElementById('extensionToggle') as HTMLInputElement;
 
 const HOMOGLYPHS: { [key: string]: string[] } = {
   'a': ['а', 'ɑ', 'α', 'ａ'], 'b': ['Ь', 'ḃ', 'ｂ'], 'c': ['с', 'ϲ', 'ⅽ'], 
@@ -76,9 +77,14 @@ function scramble(text: string, profile: string): string {
   return result;
 }
 
-chrome.storage.sync.get(['profile'], (data: any) => {
+chrome.storage.sync.get(['profile', 'enabled'], (data: any) => {
   currentProfile = data.profile || 'stealth';
   if (profileSelect) profileSelect.value = currentProfile;
+  if (extensionToggle) extensionToggle.checked = data.enabled !== false;
+});
+
+extensionToggle.addEventListener('change', () => {
+  chrome.storage.sync.set({ enabled: extensionToggle.checked });
 });
 
 profileSelect.addEventListener('change', () => {

@@ -25,13 +25,16 @@ const HOMOGLYPHS: { [key: string]: string[] } = {
 const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
 let currentProfile = 'anti-mod';
+let isEnabled = true;
 
-chrome.storage.sync.get(['profile'], (data: any) => {
+chrome.storage.sync.get(['profile', 'enabled'], (data: any) => {
   currentProfile = data.profile || 'anti-mod';
+  isEnabled = data.enabled !== false;
 });
 
 chrome.storage.onChanged.addListener((changes: any) => {
   if (changes.profile) currentProfile = changes.profile.newValue;
+  if (changes.enabled) isEnabled = changes.enabled.newValue;
 });
 
 function scramble(text: string): string {
@@ -76,31 +79,10 @@ function scramble(text: string): string {
   return result;
 }
 
-document.addEventListener('paste', (e: ClipboardEvent) => {
-  const target = e.target as HTMLElement;
-  if (target.tagName === 'TEXTAREA' || target.tagName === 'INPUT' || target.isContentEditable) {
-    const pastedText = e.clipboardData?.getData('text');
-    if (pastedText) {
-      e.preventDefault();
-      const scrambled = scramble(pastedText);
-      
-      const inputElement = target as any;
-      if ('value' in inputElement) {
-        const start = inputElement.selectionStart || 0;
-        const end = inputElement.selectionEnd || 0;
-        const currentValue = inputElement.value;
-        inputElement.value = currentValue.substring(0, start) + scrambled + currentValue.substring(end);
-        inputElement.selectionStart = inputElement.selectionEnd = start + scrambled.length;
-      } else {
-        document.execCommand('insertText', false, scrambled);
-      }
-      
-      target.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  }
-});
+
 
 document.addEventListener('keydown', (e: KeyboardEvent) => {
+  if (!isEnabled) return;
   const target = e.target as HTMLElement;
   if (target.tagName === 'TEXTAREA' || target.tagName === 'INPUT' || target.isContentEditable) {
     if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
