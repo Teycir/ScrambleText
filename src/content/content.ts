@@ -41,8 +41,8 @@ function scramble(text: string): string {
   
   switch(currentProfile) {
     case 'stealth':
-      zwProb = 0.3;
-      replaceProb = 0.5;
+      zwProb = 0.1;
+      replaceProb = 0.2;
       break;
     case 'anti-ai':
       zwProb = 0.9;
