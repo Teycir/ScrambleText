@@ -2,6 +2,19 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.4.0] - 2024-11-19
+
+### Added
+- Number scrambling support for 0, 1, 2, 3, 5, 6
+- Expanded alphabet homoglyphs with fullwidth characters
+- More Cyrillic, Greek, and dotted letter variants
+- Simple modern icon with purple gradient
+
+### Changed
+- Only visually identical number homoglyphs (removed 4, 7, 8, 9)
+- Improved character variation pool for better obfuscation
+- Updated icon design to match UI gradient theme
+
 ## [1.3.0] - 2024-11-19
 
 ### Added
