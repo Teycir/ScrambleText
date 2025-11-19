@@ -77,7 +77,7 @@ function scramble(text: string, profile: string): string {
 }
 
 chrome.storage.sync.get(['profile'], (data: any) => {
-  currentProfile = data.profile || 'anti-mod';
+  currentProfile = data.profile || 'stealth';
   profileSelect.value = currentProfile;
 });
 
