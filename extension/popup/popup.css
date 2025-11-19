@@ -128,15 +128,32 @@ h1 {
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+}
+
+.footer .heart {
+  color: #ff6b9d;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10%, 30% { transform: scale(1.1); }
+  20%, 40% { transform: scale(1); }
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
-  font-size: 11px;
-  transition: color 0.2s;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
 
 .footer a:hover {
-  color: white;
+  opacity: 0.8;
 }
