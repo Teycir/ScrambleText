@@ -1,10 +1,10 @@
 {
   "name": "scrambletext",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Human-Readable, Machine-Hostile Text Obfuscator",
   "scripts": {
     "build": "tsc && npm run copy",
-    "copy": "cp -r extension/popup/popup.html extension/popup/popup.css extension/manifest.json extension/icons dist/",
+    "copy": "cp extension/popup/popup.html dist/popup/ && cp extension/popup/popup.css dist/popup/ && cp extension/manifest.json dist/ && cp -r extension/icons dist/",
     "watch": "tsc --watch"
   },
   "repository": {

@@ -2,7 +2,7 @@
 const previewInput = document.getElementById('previewInput') as HTMLTextAreaElement;
 const previewOutput = document.getElementById('previewOutput') as HTMLDivElement;
 const copyButton = document.getElementById('copyButton') as HTMLButtonElement;
-const copyStatus = document.getElementById('copyStatus') as HTMLSpanElement;
+const regenerateButton = document.getElementById('regenerateButton') as HTMLButtonElement;
 const profileSelect = document.getElementById('profileSelect') as HTMLSelectElement;
 
 const HOMOGLYPHS: { [key: string]: string[] } = {
@@ -32,7 +32,7 @@ const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
 let lastInput = '';
 let lastOutput = '';
-let currentProfile = 'anti-mod';
+let currentProfile = 'stealth';
 
 function scramble(text: string, profile: string): string {
   let result = '';
@@ -78,7 +78,7 @@ function scramble(text: string, profile: string): string {
 
 chrome.storage.sync.get(['profile'], (data: any) => {
   currentProfile = data.profile || 'stealth';
-  profileSelect.value = currentProfile;
+  if (profileSelect) profileSelect.value = currentProfile;
 });
 
 profileSelect.addEventListener('change', () => {
@@ -102,15 +102,23 @@ previewInput.addEventListener('input', () => {
   
   lastInput = currentInput;
   previewOutput.textContent = lastOutput;
-  copyStatus.textContent = '';
+});
+
+regenerateButton.addEventListener('click', () => {
+  if (lastInput) {
+    lastOutput = scramble(lastInput, currentProfile);
+    previewOutput.textContent = lastOutput;
+    regenerateButton.textContent = '✓';
+    setTimeout(() => regenerateButton.textContent = '🔄', 500);
+  }
 });
 
 copyButton.addEventListener('click', async () => {
   const text = previewOutput.textContent || '';
   if (text) {
     await navigator.clipboard.writeText(text);
-    copyStatus.textContent = '✓ Copied!';
-    setTimeout(() => copyStatus.textContent = '', 2000);
+    copyButton.textContent = '✓';
+    setTimeout(() => copyButton.textContent = '📋', 2000);
   }
 });
 }

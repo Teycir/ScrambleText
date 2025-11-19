@@ -2,6 +2,33 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.5.0] - 2024-11-19
+
+### Changed
+- Complete UI redesign with dark purple gradient background
+- Glassmorphism design with backdrop blur effects
+- Animated mesh shader background with moving gradients
+- Icon-only buttons with smooth scale hover effects and tooltips
+- Gradient text for title
+- Larger preview areas (100px each)
+- Smooth rounded corners throughout (16px sections, 12px inputs)
+- New ghost-themed icon with purple gradient background
+
+### Added
+- Regenerate button to create new random scrambled versions
+- Custom tooltips on hover for copy and regenerate buttons
+- Visual feedback with button background changes on hover
+- Grey tint on preview output to emphasize read-only state
+
+### Removed
+- Extension status toggle (always enabled for simplicity)
+- Copy status text (replaced with button icon change)
+
+### Fixed
+- Popup height optimized to 550px to minimize scrolling
+- TypeScript module configuration for proper JS generation
+- Build script to correctly output files to dist directory
+
 ## [1.4.0] - 2024-11-19
 
 ### Added
