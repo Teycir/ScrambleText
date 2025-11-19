@@ -22,7 +22,7 @@ function scramble(text: string): string {
     } else {
       result += char;
     }
-    if (i < text.length - 1 && /[a-zA-Z]/.test(char) && Math.random() < 0.7) {
+    if (/[a-zA-Z]/.test(char) && Math.random() < 0.7) {
       result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
     }
   }

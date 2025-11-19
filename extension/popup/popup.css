@@ -1,76 +1,124 @@
 body {
-  width: 320px;
-  padding: 16px;
+  width: 380px;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  padding: 24px;
+}
+
+.header {
+  text-align: center;
 }
 
 h1 {
-  margin: 0 0 8px 0;
-  font-size: 20px;
-  color: #333;
+  margin: 0 0 4px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
 }
 
 .preview-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .preview-section label {
   font-weight: 600;
-  color: #333;
+  color: #667eea;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 
 #previewInput {
   width: 100%;
-  min-height: 60px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  min-height: 80px;
+  padding: 12px;
+  border: 2px solid #e0e7ff;
+  border-radius: 8px;
   font-size: 14px;
   resize: vertical;
   box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+#previewInput:focus {
+  outline: none;
+  border-color: #667eea;
 }
 
 #previewOutput {
-  padding: 8px;
-  background: #f5f5f5;
-  border-radius: 4px;
-  min-height: 40px;
+  padding: 12px;
+  background: #e5e7eb;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  min-height: 60px;
   font-size: 14px;
   word-wrap: break-word;
+  line-height: 1.6;
+  color: #374151;
+  cursor: default;
 }
 
 .copy-section {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-top: 4px;
 }
 
 #copyButton {
-  padding: 8px 16px;
-  background: #4CAF50;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 #copyButton:hover {
-  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+#copyButton:active {
+  transform: translateY(0);
 }
 
 #copyStatus {
-  color: #4CAF50;
+  color: #10b981;
   font-weight: 600;
   font-size: 14px;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
 }

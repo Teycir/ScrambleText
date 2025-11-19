@@ -16,6 +16,9 @@ const HOMOGLYPHS: { [key: string]: string[] } = {
 
 const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
+let lastInput = '';
+let lastOutput = '';
+
 function scramble(text: string): string {
   let result = '';
   
@@ -27,7 +30,7 @@ function scramble(text: string): string {
     } else {
       result += char;
     }
-    if (i < text.length - 1 && /[a-zA-Z]/.test(char) && Math.random() < 0.7) {
+    if (/[a-zA-Z]/.test(char) && Math.random() < 0.7) {
       result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
     }
   }
@@ -35,7 +38,17 @@ function scramble(text: string): string {
 }
 
 previewInput.addEventListener('input', () => {
-  previewOutput.textContent = scramble(previewInput.value);
+  const currentInput = previewInput.value;
+  
+  if (currentInput.startsWith(lastInput) && currentInput.length > lastInput.length) {
+    const newChars = currentInput.slice(lastInput.length);
+    lastOutput += scramble(newChars);
+  } else {
+    lastOutput = scramble(currentInput);
+  }
+  
+  lastInput = currentInput;
+  previewOutput.textContent = lastOutput;
   copyStatus.textContent = '';
 });
 

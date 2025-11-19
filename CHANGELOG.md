@@ -2,6 +2,25 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.2.0] - 2024-11-19
+
+### Added
+- Modern gradient UI design with purple theme
+- Subtitle "Human-readable, machine-hostile" in popup header
+- Smooth animations for button hover and copy confirmation
+- Visual distinction for read-only output field (light grey background)
+
+### Changed
+- Incremental scrambling - only new characters get scrambled as you type
+- Previously scrambled text remains consistent
+- Zero-width characters now added after all letters (not just between)
+- Improved popup layout with better spacing and rounded corners
+- Enhanced button styling with gradient and shadow effects
+
+### Fixed
+- Output text no longer changes when adding spaces after words
+- Consistent scrambling behavior throughout typing
+
 ## [1.1.0] - 2024-11-19
 
 ### Changed
