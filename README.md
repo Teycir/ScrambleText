@@ -1,5 +1,12 @@
 # ScrambleText: Human-Readable, Machine-Hostile Text Obfuscator
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green.svg)](https://developer.chrome.com/docs/extensions/)
+[![Version](https://img.shields.io/badge/version-1.5.0-purple.svg)](https://github.com/Teycir/ScrambleText/releases)
+
+![ScrambleText UI](extension/Assets/mainpopup.png)
+
 ScrambleText is a Chrome extension that transforms what you type into text that:
 
 - Looks normal to humans
