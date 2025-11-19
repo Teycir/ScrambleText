@@ -23,11 +23,12 @@ const HOMOGLYPHS: { [key: string]: string[] } = {
 
 const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
-let currentProfile = 'anti-mod';
-
-chrome.storage.sync.get(['profile'], (data: any) => {
-  currentProfile = data.profile || 'anti-mod';
-});
+const PROFILE_NAMES: { [key: string]: string } = {
+  'anti-ai': '🤖 Anti-AI Training',
+  'anti-mod': '🛡️ Anti-Moderation',
+  'stealth': '👻 Privacy Stealth',
+  'chaos': '💥 Maximum Chaos'
+};
 
 function scramble(text: string, profile: string): string {
   let result = '';
@@ -82,15 +83,17 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === 'scrambleText' && info.selectionText && tab?.id) {
     const profile = await chrome.storage.sync.get(['profile']);
-    const scrambled = scramble(info.selectionText, profile.profile || 'anti-mod');
+    const currentProfile = profile.profile || 'anti-mod';
+    const scrambled = scramble(info.selectionText, currentProfile);
+    const profileName = PROFILE_NAMES[currentProfile];
     
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      func: (scrambledText: string) => {
+      func: (scrambledText: string, modeName: string) => {
         navigator.clipboard.writeText(scrambledText);
         
         const toast = document.createElement('div');
-        toast.innerHTML = '✓ Text scrambled!<br><small style="opacity: 0.9; font-size: 12px;">Copied to clipboard - paste with Ctrl+V</small>';
+        toast.innerHTML = `✓ Text scrambled!<br><small style="opacity: 0.9; font-size: 11px;">${modeName} • Copied to clipboard</small>`;
         toast.style.cssText = `
           position: fixed;
           top: 20px;
@@ -127,7 +130,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
           setTimeout(() => toast.remove(), 300);
         }, 3000);
       },
-      args: [scrambled]
+      args: [scrambled, profileName]
     });
   }
 });
