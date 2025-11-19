@@ -144,13 +144,17 @@ Platforms can adapt. ScrambleText raises the cost and complexity of automated sc
 
 - Browser extension (Chrome-compatible)
 - Human-readable output by design
-- Configurable:
-  - On/off toggle
-  - Aggressiveness level (light / normal / heavy)
-  - Per-site enable/disable
-  - Optional whitelist/blacklist of words or domains
-- Instant feedback:
-  - Preview transformed text in the extension popup before posting (optional feature)
+- Modern dark purple UI with glassmorphism design
+- Animated mesh shader background
+- Four obfuscation profiles:
+  - 👻 Privacy Stealth (minimal, 10% zero-width, 20% replacement)
+  - 🤖 Anti-AI Training (aggressive, 90% zero-width, 100% replacement)
+  - 🛡️ Anti-Moderation (balanced, 70% zero-width, 100% replacement)
+  - 💥 Maximum Chaos (extreme, 100% zero-width with doubles, 100% replacement)
+- Live preview with instant scrambling as you type
+- Regenerate button for new random variations
+- Copy to clipboard with visual feedback
+- Icon-only buttons with hover tooltips
 - Open-source:
   - Code is public
   - No secret data collection
@@ -201,43 +205,49 @@ To install ScrambleText directly from this repository:
 ## Quick Start
 
 1. Install the extension.
-2. Click the ScrambleText icon in the toolbar.
-3. Toggle it ON.
-4. Choose your mode (for example: "Normal" obfuscation).
-5. Go to a site with a text box (X/Twitter, Facebook, Reddit, etc.).
-6. Type your message as usual.
-7. Depending on implementation mode:
-   - The text in the box may update in place to the obfuscated version, or
-   - ScrambleText obfuscates just before submission (e.g., when you click Post/Enter).
-8. Post as normal.
+2. Click the ScrambleText ghost icon 👻 in the toolbar.
+3. Choose your obfuscation profile:
+   - 👻 Privacy Stealth - Minimal obfuscation, nearly invisible
+   - 🤖 Anti-AI Training - Maximum disruption for AI training data
+   - 🛡️ Anti-Moderation - Balanced approach for keyword filters
+   - 💥 Maximum Chaos - Extreme obfuscation with double zero-width chars
+4. Type your message in the preview box.
+5. See the scrambled output update in real-time.
+6. Click 🔄 to regenerate a new random variation.
+7. Click 📋 to copy the scrambled text (icon changes to ✓).
+8. Paste and post on any platform.
 
-Your followers should see readable text. Automated filters and scrapers see Unicode chaos.
+Your followers see readable text. Automated filters and scrapers see Unicode chaos.
 
 ---
 
-## Usage Modes
+## Obfuscation Profiles
 
-ScrambleText supports multiple obfuscation levels:
+ScrambleText offers four carefully tuned profiles:
 
-- **Light mode**:
-  - Minimal homoglyph usage
-  - Sparse zero-width characters
-  - Designed to look almost indistinguishable from plain ASCII
+- **👻 Privacy Stealth**:
+  - 10% zero-width character injection
+  - 20% homoglyph replacement
+  - Nearly invisible to human readers
+  - Light protection against basic filters
 
-- **Normal mode**:
-  - Balanced obfuscation
+- **🤖 Anti-AI Training**:
+  - 90% zero-width character injection
+  - 100% homoglyph replacement
+  - Maximum disruption for tokenizers
+  - Pollutes training data effectively
+
+- **🛡️ Anti-Moderation**:
+  - 70% zero-width character injection
+  - 100% homoglyph replacement
+  - Balanced approach for keyword filters
   - Good for everyday use
-  - Most Latin letters replaced when safe
 
-- **Heavy mode**:
-  - Aggressive homoglyph and zero-width injection
-  - Maximum adversarial effect
-  - May impact copy/paste, search, and some older systems
-
-You can also:
-
-- Enable/disable on specific domains
-- Temporarily disable ScrambleText for a single text box or post
+- **💥 Maximum Chaos**:
+  - 100% zero-width injection with doubles
+  - 100% homoglyph replacement
+  - Extreme obfuscation
+  - May impact some platforms
 
 ---
 
@@ -407,6 +417,10 @@ To build ScrambleText from source:
    ```bash
    npm run build
    ```
+   Or use the build script:
+   ```bash
+   bash build.sh
+   ```
    Output goes to `dist/` directory
 
 3. Load the built extension in Chrome:
@@ -415,7 +429,12 @@ To build ScrambleText from source:
    - Click "Load unpacked"
    - Select the `dist/` directory
 
-4. Test on various sites and input fields.
+4. The extension features:
+   - Dark purple gradient UI with animated background
+   - Ghost-themed icon
+   - Live preview with instant scrambling
+   - Four obfuscation profiles
+   - Regenerate and copy buttons with tooltips
 
 ---
 
