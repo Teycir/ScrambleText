@@ -2,6 +2,19 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.3.0] - 2024-11-19
+
+### Added
+- Auto-scramble on paste - pasted text is automatically scrambled
+- Context menu integration - right-click selected text → "Scramble selected text"
+- Toast notifications with gradient design showing scramble success
+- Clipboard integration for context menu scrambling
+
+### Features
+- Scrambled text copied to clipboard with visual confirmation
+- Smooth slide-in/slide-out animations for notifications
+- Works on all websites including LinkedIn, Twitter, Facebook
+
 ## [1.2.0] - 2024-11-19
 
 ### Added

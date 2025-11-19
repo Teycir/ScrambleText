@@ -10,6 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": false
   },
-  "files": ["src/content/content.ts", "src/popup/popup.ts"],
+  "files": ["src/content/content.ts", "src/popup/popup.ts", "src/background/background.ts"],
   "exclude": ["node_modules", "dist"]
 }
