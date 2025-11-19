@@ -470,3 +470,9 @@ If you find ScrambleText useful, consider:
 - 🔀 Contributing code or documentation
 
 For questions or support, please open an issue on GitHub.
+
+---
+
+## Credits
+
+Created by [Teycir Ben Soltane](https://teycirbensoltane.tn)
