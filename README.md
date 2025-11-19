@@ -5,6 +5,8 @@
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green.svg)](https://developer.chrome.com/docs/extensions/)
 [![Version](https://img.shields.io/badge/version-1.5.0-purple.svg)](https://github.com/Teycir/ScrambleText/releases)
 
+## 🎥 [Watch Demo Video](https://sendspark.com/share/rj0l7qdimch3bqtw0vgxf53o462hxx8b)
+
 ![ScrambleText UI](extension/Assets/mainpopup.png)
 
 ScrambleText is a Chrome extension that transforms what you type into text that:
