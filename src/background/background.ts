@@ -23,19 +23,49 @@ const HOMOGLYPHS: { [key: string]: string[] } = {
 
 const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
-function scramble(text: string): string {
+let currentProfile = 'anti-mod';
+
+chrome.storage.sync.get(['profile'], (data: any) => {
+  currentProfile = data.profile || 'anti-mod';
+});
+
+function scramble(text: string, profile: string): string {
   let result = '';
+  let zwProb = 0.7;
+  let replaceProb = 1.0;
+  
+  switch(profile) {
+    case 'stealth':
+      zwProb = 0.3;
+      replaceProb = 0.5;
+      break;
+    case 'anti-ai':
+      zwProb = 0.9;
+      replaceProb = 1.0;
+      break;
+    case 'chaos':
+      zwProb = 1.0;
+      replaceProb = 1.0;
+      break;
+    case 'anti-mod':
+    default:
+      zwProb = 0.7;
+      replaceProb = 1.0;
+  }
   
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
-    if (HOMOGLYPHS[char]) {
+    if (HOMOGLYPHS[char] && Math.random() < replaceProb) {
       const variants = HOMOGLYPHS[char];
       result += variants[Math.floor(Math.random() * variants.length)];
     } else {
       result += char;
     }
-    if (/[a-zA-Z0-9]/.test(char) && Math.random() < 0.7) {
+    if (/[a-zA-Z0-9]/.test(char) && Math.random() < zwProb) {
       result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
+      if (profile === 'chaos' && Math.random() < 0.5) {
+        result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
+      }
     }
   }
   return result;
@@ -51,7 +81,8 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === 'scrambleText' && info.selectionText && tab?.id) {
-    const scrambled = scramble(info.selectionText);
+    const profile = await chrome.storage.sync.get(['profile']);
+    const scrambled = scramble(info.selectionText, profile.profile || 'anti-mod');
     
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },

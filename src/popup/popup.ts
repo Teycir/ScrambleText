@@ -3,6 +3,7 @@ const previewInput = document.getElementById('previewInput') as HTMLTextAreaElem
 const previewOutput = document.getElementById('previewOutput') as HTMLDivElement;
 const copyButton = document.getElementById('copyButton') as HTMLButtonElement;
 const copyStatus = document.getElementById('copyStatus') as HTMLSpanElement;
+const profileSelect = document.getElementById('profileSelect') as HTMLSelectElement;
 
 const HOMOGLYPHS: { [key: string]: string[] } = {
   'a': ['а', 'ɑ', 'α', 'ａ'], 'b': ['Ь', 'ḃ', 'ｂ'], 'c': ['с', 'ϲ', 'ⅽ'], 
@@ -31,33 +32,72 @@ const ZERO_WIDTH = ['\u200B', '\u200C', '\u200D'];
 
 let lastInput = '';
 let lastOutput = '';
+let currentProfile = 'anti-mod';
 
-function scramble(text: string): string {
+function scramble(text: string, profile: string): string {
   let result = '';
+  let zwProb = 0.7;
+  let replaceProb = 1.0;
+  
+  switch(profile) {
+    case 'stealth':
+      zwProb = 0.3;
+      replaceProb = 0.5;
+      break;
+    case 'anti-ai':
+      zwProb = 0.9;
+      replaceProb = 1.0;
+      break;
+    case 'chaos':
+      zwProb = 1.0;
+      replaceProb = 1.0;
+      break;
+    case 'anti-mod':
+    default:
+      zwProb = 0.7;
+      replaceProb = 1.0;
+  }
   
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
-    if (HOMOGLYPHS[char]) {
+    if (HOMOGLYPHS[char] && Math.random() < replaceProb) {
       const variants = HOMOGLYPHS[char];
       result += variants[Math.floor(Math.random() * variants.length)];
     } else {
       result += char;
     }
-    if (/[a-zA-Z0-9]/.test(char) && Math.random() < 0.7) {
+    if (/[a-zA-Z0-9]/.test(char) && Math.random() < zwProb) {
       result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
+      if (profile === 'chaos' && Math.random() < 0.5) {
+        result += ZERO_WIDTH[Math.floor(Math.random() * ZERO_WIDTH.length)];
+      }
     }
   }
   return result;
 }
+
+chrome.storage.sync.get(['profile'], (data: any) => {
+  currentProfile = data.profile || 'anti-mod';
+  profileSelect.value = currentProfile;
+});
+
+profileSelect.addEventListener('change', () => {
+  currentProfile = profileSelect.value;
+  chrome.storage.sync.set({ profile: currentProfile });
+  if (lastInput) {
+    lastOutput = scramble(lastInput, currentProfile);
+    previewOutput.textContent = lastOutput;
+  }
+});
 
 previewInput.addEventListener('input', () => {
   const currentInput = previewInput.value;
   
   if (currentInput.startsWith(lastInput) && currentInput.length > lastInput.length) {
     const newChars = currentInput.slice(lastInput.length);
-    lastOutput += scramble(newChars);
+    lastOutput += scramble(newChars, currentProfile);
   } else {
-    lastOutput = scramble(currentInput);
+    lastOutput = scramble(currentInput, currentProfile);
   }
   
   lastInput = currentInput;

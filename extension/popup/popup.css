@@ -32,6 +32,39 @@ h1 {
   font-weight: 500;
 }
 
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section label {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#profileSelect {
+  padding: 10px;
+  border: 2px solid #e0e7ff;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+#profileSelect:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
 .preview-section {
   display: flex;
   flex-direction: column;
@@ -130,6 +163,21 @@ h1 {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.7);
   font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer .github-link {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.footer .github-link:hover {
+  color: white;
 }
 
 .footer .heart {
