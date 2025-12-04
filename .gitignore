@@ -1,0 +1,10 @@
+node_modules/
+
+*.log
+*.js
+*.js.map
+.DS_Store
+*.crx
+*.pem
+.env
+.history

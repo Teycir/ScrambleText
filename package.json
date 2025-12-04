@@ -1,0 +1,21 @@
+{
+  "name": "scrambletext",
+  "version": "1.4.1",
+  "description": "Human-Readable, Machine-Hostile Text Obfuscator",
+  "scripts": {
+    "build": "tsc && npm run copy",
+    "copy": "cp extension/popup/popup.html dist/popup/ && cp extension/popup/popup.css dist/popup/ && cp extension/manifest.json dist/ && cp -r extension/icons dist/",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Teycir/ScrambleText.git"
+  },
+  "keywords": ["chrome-extension", "obfuscation", "privacy", "text-transformation"],
+  "author": "Teycir",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.254",
+    "typescript": "^5.3.3"
+  }
+}
