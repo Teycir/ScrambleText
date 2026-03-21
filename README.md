@@ -1,3 +1,22 @@
+<!-- donation:eth:start -->
+<div align="center">
+
+## Support Development
+
+If this project helps your work, support ongoing maintenance and new features.
+
+**ETH Donation Wallet**  
+`0x11282eE5726B3370c8B480e321b3B2aA13686582`
+
+<a href="https://etherscan.io/address/0x11282eE5726B3370c8B480e321b3B2aA13686582">
+  <img src="publiceth.svg" alt="Ethereum donation QR code" width="220" />
+</a>
+
+_Scan the QR code or copy the wallet address above._
+
+</div>
+<!-- donation:eth:end -->
+
 # ScrambleText: Human-Readable, Machine-Hostile Text Obfuscator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
