@@ -1,6 +1,6 @@
 {
   "name": "scrambletext",
-  "version": "1.4.1",
+  "version": "1.6.1",
   "description": "Human-Readable, Machine-Hostile Text Obfuscator",
   "scripts": {
     "build": "tsc && npm run copy",

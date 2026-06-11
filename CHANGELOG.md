@@ -2,6 +2,19 @@
 
 All notable changes to ScrambleText will be documented in this file.
 
+## [1.6.1] - 2024-11-20
+
+### Added
+- Keyboard shortcut **Ctrl+Shift+Q** (or **Cmd+Shift+Q** on Mac) to scramble selected text
+- In-place text scrambling on any webpage without opening popup
+- Works with any text selection in input fields, textareas, and editable content
+
+### Features
+- Select text, press shortcut, and it's instantly scrambled
+- Uses current obfuscation profile settings
+- Respects extension ON/OFF toggle state
+- Fast and seamless workflow for quick scrambling
+
 ## [1.6.0] - 2024-11-19
 
 ### Added

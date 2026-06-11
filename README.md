@@ -22,7 +22,7 @@ _Scan the QR code or copy the wallet address above._
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green.svg)](https://developer.chrome.com/docs/extensions/)
-[![Version](https://img.shields.io/badge/version-1.5.0-purple.svg)](https://github.com/Teycir/ScrambleText/releases)
+[![Version](https://img.shields.io/badge/version-1.6.1-purple.svg)](https://github.com/Teycir/ScrambleText/releases)
 
 ## 🎥 [Watch Demo Video](https://sendspark.com/share/rj0l7qdimch3bqtw0vgxf53o462hxx8b)
 
@@ -180,9 +180,11 @@ Platforms can adapt. ScrambleText raises the cost and complexity of automated sc
   - 🛡️ Anti-Moderation (balanced, 70% zero-width, 100% replacement)
   - 💥 Maximum Chaos (extreme, 100% zero-width with doubles, 100% replacement)
 - Live preview with instant scrambling as you type
+- Keyboard shortcut (**Ctrl+Shift+Q** / **Cmd+Shift+Q**) to scramble selected text on any webpage
 - Regenerate button for new random variations
 - Copy to clipboard with visual feedback
 - Icon-only buttons with hover tooltips
+- ON/OFF toggle to enable/disable all scrambling features
 - Open-source:
   - Code is public
   - No secret data collection
@@ -244,6 +246,8 @@ To install ScrambleText directly from this repository:
 6. Click 🔄 to regenerate a new random variation.
 7. Click 📋 to copy the scrambled text (icon changes to ✓).
 8. Paste and post on any platform.
+
+**Quick Scramble:** Select any text on any webpage and press **Ctrl+Shift+Q** (or **Cmd+Shift+Q** on Mac) to instantly scramble it in place.
 
 Your followers see readable text. Automated filters and scrapers see Unicode chaos.
 
