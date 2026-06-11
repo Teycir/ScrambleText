@@ -41,26 +41,13 @@ function scramble(text: string): string {
   let result = '';
   let zwProb = 0.7;
   let replaceProb = 1.0;
-  
   switch(currentProfile) {
-    case 'stealth':
-      zwProb = 0.1;
-      replaceProb = 0.2;
-      break;
-    case 'anti-ai':
-      zwProb = 0.9;
-      replaceProb = 1.0;
-      break;
-    case 'chaos':
-      zwProb = 1.0;
-      replaceProb = 1.0;
-      break;
+    case 'stealth':  zwProb = 0.1; replaceProb = 0.2; break;
+    case 'anti-ai':  zwProb = 0.9; replaceProb = 1.0; break;
+    case 'chaos':    zwProb = 1.0; replaceProb = 1.0; break;
     case 'anti-mod':
-    default:
-      zwProb = 0.7;
-      replaceProb = 1.0;
+    default:         zwProb = 0.7; replaceProb = 1.0;
   }
-  
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
     if (HOMOGLYPHS[char] && Math.random() < replaceProb) {
@@ -79,26 +66,48 @@ function scramble(text: string): string {
   return result;
 }
 
-
-
 document.addEventListener('keydown', (e: KeyboardEvent) => {
   if (!isEnabled) return;
   const target = e.target as HTMLElement;
-  if (target.tagName === 'TEXTAREA' || target.tagName === 'INPUT' || target.isContentEditable) {
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      const inputElement = target as any;
-      const originalText = inputElement.value || target.textContent || '';
-      const scrambled = scramble(originalText);
-      
-      if ('value' in inputElement) {
-        inputElement.value = scrambled;
-      } else {
-        target.textContent = scrambled;
-      }
-      
-      target.dispatchEvent(new Event('input', { bubbles: true }));
-    }
+  const isEditable = target.tagName === 'TEXTAREA' || target.tagName === 'INPUT' || target.isContentEditable;
+  if (!isEditable) return;
+
+  // Ctrl+Shift+Q — the only shortcut (works on Q or q)
+  const isScrambleKey = e.ctrlKey && e.shiftKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 'q';
+  if (!isScrambleKey) return;
+  e.preventDefault();
+
+  const inputElement = target as HTMLInputElement | HTMLTextAreaElement;
+
+  if ('value' in inputElement) {
+    const start = inputElement.selectionStart ?? 0;
+    const end   = inputElement.selectionEnd   ?? 0;
+    if (start === end) return;
+
+    const before    = inputElement.value.slice(0, start);
+    const selected  = inputElement.value.slice(start, end);
+    const after     = inputElement.value.slice(end);
+    const scrambled = scramble(selected);
+    inputElement.value = before + scrambled + after;
+    inputElement.setSelectionRange(start, start + scrambled.length);
+    target.dispatchEvent(new Event('input', { bubbles: true }));
+
+  } else if (target.isContentEditable) {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+
+    const range = sel.getRangeAt(0);
+    const selectedText = range.toString();
+    if (!selectedText) return;
+
+    const scrambled = scramble(selectedText);
+    range.deleteContents();
+    const textNode = document.createTextNode(scrambled);
+    range.insertNode(textNode);
+    range.selectNode(textNode);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    target.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
 }
